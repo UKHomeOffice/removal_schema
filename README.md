@@ -9,12 +9,20 @@ The purpose of the document is to detail the interactions available between each
 ## OWNERSHIP AND CONTROL
 
 ### ICD Ownership
-This ICD is currently owned by Home Office Digital on behalf of the IDP.
+This ICD is currently owned by the IRC Capacity Management team at the Home Office.
 
 ### ICD Maintenance Policy
-Proposed changes to this ICD and schema will be managed via [Github pull requests](https://help.github.com/articles/using-pull-requests/)
-Any material change to this ICD will need to be approved by the HO change control process.
-Non-material changes such as spelling mistakes of clarifications of existing capabilities do not require the HO change control process.
+Proposed changes to this ICD and schema will be managed via [Github pull requests](https://help.github.com/articles/using-pull-requests/) on this repository.
+Non-material changes such as spelling mistakes or clarifications of existing capabilities shall be reviewed by the Capacity Management Team and merged to the master branch.
+
+Any backwards compatible changes will be reviewed by the IRC Capacity Management Team as part of ongoing development of the service and merged.
+If consumers of the interface are required to make use of the introduced functionality, they will be commercially engaged to do so.
+
+Any breaking changes will be prepared on a branch by the Capacity Management Team.
+Consumers of the interface will be commercially engaged to review, agree and prepare for the change prior to it being merged and introduced to the live service.
+
+It is not anticipated that there will be any breaking changes made to this interface.
+Any significant changes are likely to be made by introducing a new version of the API and engaging consumers individually to discuss migration.
 
 
 ## Interface Context
@@ -25,7 +33,7 @@ The business require a technology that will aggregate, store and display data in
 
 ### Conceptual Architecture Diagram
 
-Programming interactions between IRCs and the DEPMU Bed Management Dashboard will be through a common API. 
+Programming interactions between IRCs and the DEPMU Bed Management Dashboard will be through a common API.
 
 [diagram]
 ![Conceptual Architecture Diagram](./assets/architecture_diagram.png)
