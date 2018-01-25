@@ -76,6 +76,7 @@ Invoked at `1 minute` intervals.
 
 # Utilities
 [![Build](https://travis-ci.org/UKHomeOffice/removals_schema.png)](https://travis-ci.org/UKHomeOffice/removals_schema)
+
 In this repository you will also find a tool that can be used to generate fake data which can be useful for testing and exploring the schema.
 ### To output 10 events to stdout
 ```shell
