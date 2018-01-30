@@ -1,7 +1,7 @@
-# Bed Space Management Interface Control Document and schema
+# IRC Capacity Management Interface Control Document and schema
 
 ## Purpose and Scope
-This document describes the interface between IRC Bed Management and its data providers
+This document describes the interface between IRC Capacity Management and its data providers
 The purpose of the document is to detail the interactions available between each IRC platform and the Home Office dashboard for Bed Allocation by DEPMU and describes the metadata and security arrangements for the data.
 
 ## OWNERSHIP AND CONTROL
