@@ -42,12 +42,15 @@ The API presents the following HTTP endpoints:
 
 ## Authentication
 
-All new clients must be authenticated.
+All new clients must be authenticated in order to use API endpoints.
 Existing clients may use their existing unauthenticated endpoints but should migrate to authentication as soon as feasible.
+This document describes the authenticated API only.
 
-Authentication to the IRC Capacity Management API is via OpenID Connect.
+Authentication to the IRC Capacity Management API is via a Client Credentials OpenID Connect grant, as described in IETF RFC 6749 §4.4.
 Clients must present their credentials to the authenticating endpoint in exchange for a bearer token.
-This bearer token should be included in the `Authorization: Bearer xxx` header as described in IETF RFC 6750.
+In all requests to other endpoints, this bearer token should be included in the standard `Authorization` header, defined in HTTP/1.1, as described in IETF RFC 6750 §2.1.
+
+The bearer token is time-limited and must be renewed after a period of time.
 
 If you do not have credentials, or your credentials have been compromised, contact the IRC Capacity Management team at the Home Office to request new ones.
 
@@ -65,11 +68,11 @@ Invoked on the following events by the IRC:
 ##### Process flow:
 - Capture the data required as described in the schema
 - Validate data with the [schema](./event.json)
-- Submit to the correct endpoint (as provided to the provider) over HTTPS/TLS
+- Submit to the correct endpoint (as provided to the provider) over HTTPS/TLS including authentication headers
 - Should an error occur submitting, queue the event, and retry the queue at `1 minute` intervals raising exceptions to the relevant support party so that it can be addressed and monitored
   - timeout should be set to 5 seconds
   - `3xx` redirects should be followed
-  - should a `4xx` or `5xx` error occur, 
+  - should a `4xx` or `5xx` error occur,
   - consider ultimately anything (after any redirects) that result in a non `2xx` status code to be an error
 
 ## Heartbeat API
