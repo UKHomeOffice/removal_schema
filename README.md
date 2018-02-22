@@ -37,8 +37,19 @@ Programming interactions between IRCs and the DEPMU Bed Management Dashboard wil
 ![Conceptual Architecture Diagram](./assets/architecture_diagram.png)
 
 The API presents the following HTTP endpoints:
-- `/irc_entry/event`
-- `/irc_entry/heartbeat`
+- `/irc_entry/<centre name>/event`
+- `/irc_entry/<centre name>/heartbeat`
+
+## Authentication
+
+All new clients must be authenticated.
+Existing clients may use their existing unauthenticated endpoints but should migrate to authentication as soon as feasible.
+
+Authentication to the IRC Capacity Management API is via OpenID Connect.
+Clients must present their credentials to the authenticating endpoint in exchange for a bearer token.
+This bearer token should be included in the `Authorization: Bearer xxx` header as described in IETF RFC 6750.
+
+If you do not have credentials, or your credentials have been compromised, contact the IRC Capacity Management team at the Home Office to request new ones.
 
 ## Event API
 Invoked on the following events by the IRC:
