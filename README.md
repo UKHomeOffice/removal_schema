@@ -48,11 +48,41 @@ This document describes the authenticated API only.
 
 Authentication to the IRC Capacity Management API is via a Client Credentials OpenID Connect grant, as described in IETF RFC 6749 §4.4.
 Clients must present their credentials to the authenticating endpoint in exchange for a bearer token.
-In all requests to other endpoints, this bearer token should be included in the standard `Authorization` header, defined in HTTP/1.1, as described in IETF RFC 6750 §2.1.
 
 The bearer token is time-limited and must be renewed after a period of time.
 
-If you do not have credentials, or your credentials have been compromised, contact the IRC Capacity Management team at the Home Office to request new ones.
+
+#### Obtaining credentials
+
+Clients should request credentials from the IRC Capacity Management team, providing a PGP public key.
+In return, they will receive a JSON file containing the information needed to request an access token for a certain Immigration Removal Centre.
+
+If your credentials are compromised or otherwise no longer secure, you must contact the IRC Capacity Management team at the Home Office to request new ones.
+
+#### Obtaining a token
+
+Clients must make a POST request to an endpoint to obtain their OIDC access token.
+The URL should be constructed from the information given in the JSON file provided in the following fashion:
+
+```
+<auth-server-url>/realms/<realm>/protocol/openid-connect/token
+```
+
+Clients should authenticate to this endpoint using the Basic authentication scheme described in [RFC 2617](https://tools.ietf.org/html/rfc2617#section-2).
+The userid should be taken from the `resource` value, and the password from `credentials.secret`, of the JSON file.
+
+The POST request must contain the parameter `grant_type=credentials` and an appropriate `Content-Type` header.
+
+A successful request will return a JSON response containing the `access_token` which should be presented to the other endpoints.
+
+#### Invoking the APIs
+
+To invoke the other endpoints, clients must present a valid access token.
+This should be included in every request to a protected endpoint via an `Authorization: Bearer` header as described in [RFC 6750](https://tools.ietf.org/html/rfc6750#section-2.1).
+
+Access tokens expire after a certain period of time, after which a new token must be requested.
+The expiry period for a given token is listed in the JSON response of the token request.
+It is also embedded within the access token (a [JSON web token](https://jwt.io/)).
 
 ## Event API
 Invoked on the following events by the IRC:
