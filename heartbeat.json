@@ -7,6 +7,19 @@
       "type": "string",
       "pattern": "^[a-z]{3,30}$"
     },
+    "male_total_configured": {
+      "description": "Total number of male beds configured in the IRC DMS",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5000
+    },
+    "female_total_configured": {
+      "description": "Total number of female beds configured in the IRC DMS",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5000
+    },
+
     "male_occupied": {
       "description": "Number of male beds occupied",
       "type": "integer",

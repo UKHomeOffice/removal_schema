@@ -62,11 +62,11 @@ Invoked on the following events by the IRC:
   - consider ultimately anything (after any redirects) that result in a non `2xx` status code to be an error
 
 ## Heartbeat API
-The purpose of this is to provide always up to date bed occupation and out of commission information.
+The purpose of this is to provide always up to date total bed count, bed occupation and out of commission information.
 
 Invoked at `1 minute` intervals.
 ##### Process flow:
-- Capture the data required as described in the schema
+- Capture the data required as described in the schema. NOTE: The total bed count attributes are optional for backwards compatibility but must be populated by all new API consumers. They will be made mandatory in a future release.
 - Validate data with the [schema](./heartbeat.json)
 - Submit to the correct endpoint (as provided to the provider) over HTTPS/TLS
 - Should an error occur submitting *do not queue* and raise the exception to the relevant support party so that it can be addressed and monitored.
